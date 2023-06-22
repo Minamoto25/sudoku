@@ -6,8 +6,6 @@
 #include<iostream>
 #include<unordered_map>
 typedef std::vector<std::vector<int>> Board;
-std::random_device rd;
-std::mt19937 gen = std::mt19937(rd());    
 
 class Generator{
 private:
@@ -26,12 +24,27 @@ public:
 void printBoard(const Board& board);
 
 class ProblemMaker{
+    std::unordered_map<std::string,int> board_history;
+    const std::vector<Board>& boards;
 public:
-    int level;
     int min_empty, max_empty;
     int total;
-    ProblemMaker(int level, int min_empty, int max_empty, int total) :
-     level(level), min_empty(min_empty), max_empty(max_empty), total(total) {}
-    std::vector<Board> makeProblems(const std::vector<Board>& boards);
+    ProblemMaker(int min_empty, int max_empty, int total, const std::vector<Board>& boards) :
+    min_empty(min_empty), max_empty(max_empty), total(total),boards(boards) {}
+    std::vector<Board> makeProblems();
+};
+
+class Solver{
+private:
+    Board board;
+    unsigned long long try_sum=0;
+    std::vector<Board> solutions;
+    bool dfs(int row, int col);
+    bool isValid(const Board& board, int row, int col, int num);
+public:
+    Solver(const Board& board) : board(board) {};
+    void solve();
+    int getLevel() const {return try_sum*solutions.size();}
+    const std::vector<Board>& getSolutions() const {return solutions;}
 };
 #endif
