@@ -1,7 +1,6 @@
 #include "helper.h"
 #include<fstream>
 
-
 void printBoard(const Board& board){
     for(auto row : board){
         for(auto num : row){

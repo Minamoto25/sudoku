@@ -14,7 +14,7 @@ int main(int argc, char* args[]){
     int opt;
     //TODO: check illegal arguments
     std::string error_msg;
-    while((opt = getopt(argc,args,"c:s:n:m:r:u:"))!=-1){
+    while((opt = getopt(argc,args,"c:s:n:m:r:u"))!=-1){
         switch(opt){
             case 'c':
                 final_boards_cnt = std::stoi(optarg);
@@ -39,16 +39,11 @@ int main(int argc, char* args[]){
                 max_empty = std::stoi(strchr(optarg,'~')+1);
                 break;
             case 'u':
-                unique = std::stoi(optarg);
+                unique = true;
                 break;
             default:
-                error_msg = "bad arguments\n";
-                break;
+                return 1;
         }
-    }
-    if(error_msg!=""){
-        std::cout<<error_msg<<std::endl;
-        return 1;
     }
     error_msg = args_checker(final_boards_cnt, problem_input_path, games_cnt, game_level, min_empty, max_empty, unique);
     if(error_msg!=""){
