@@ -140,7 +140,7 @@ bool Solver::dfs(int row, int col)
         if(isValid(board, row, col, i)){
             board[row][col] = i;
             bool res = dfs(row, col+1);
-            if(!res) try_sum+=i;
+            if(!res) try_sum+=1;
             board[row][col] = 0;
         }
     }

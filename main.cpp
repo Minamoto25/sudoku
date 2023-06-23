@@ -63,7 +63,6 @@ int main(int argc, char* args[]){
     //generate problems
     if(games_cnt){
         std::ifstream in("final_boards.txt");
-        std::cout<<&in<<std::endl;
         std::vector<Board> boards;
         Board board(9,std::vector<int>(9,0));
         // while(!in.eof()){ not work, keep returning 0 when hit eof
