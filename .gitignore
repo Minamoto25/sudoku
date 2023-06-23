@@ -3,3 +3,4 @@
 *.txt
 *.gch
 !CMakeLists.txt
+build/
