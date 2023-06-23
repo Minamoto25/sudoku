@@ -1,37 +1,6 @@
 #include<algorithm>
 #include "sudoku.h"
-void printBoard(const Board& board){
-    for(auto row : board){
-        for(auto num : row){
-            if(num!=0) std::cout<<num<<" ";
-            else std::cout<<"$ ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-}
-void writeBoard(const Board& board, std::ostream& out){
-    for(auto row : board){
-        for(auto num : row){
-            if(num!=0) out<<num<<" ";
-            else out<<"$ ";
-        }
-        out << std::endl;
-    }
-    out << std::endl;
-}
-bool readBoard(Board& board, std::istream& in){
-    for(auto& row : board){
-        for(auto& num : row){
-            char c;
-            in>>c;
-            if(!c) return false;
-            if(c=='$') num=0;
-            else num=c-'0';
-        }
-    }
-    return true;
-}
+#include "helper.h"
 std::random_device rd;
 std::mt19937 gen = std::mt19937(rd());
 
@@ -171,7 +140,7 @@ bool Solver::dfs(int row, int col)
         if(isValid(board, row, col, i)){
             board[row][col] = i;
             bool res = dfs(row, col+1);
-            if(res) try_sum+=i;
+            if(!res) try_sum+=i;
             board[row][col] = 0;
         }
     }

@@ -21,9 +21,6 @@ public:
     std::vector<Board> generate(unsigned cnt);
 };
 
-void printBoard(const Board& board);
-void writeBoard(const Board& board, std::ostream& os);
-bool readBoard(Board& board, std::istream& is);
 
 class ProblemMaker{
     std::unordered_map<std::string,int> board_history;
@@ -46,7 +43,11 @@ public:
     Solver(const Board& board) : board(board) {};
     void solve();
     //TODO: return the level of the game
-    int getLevel() const {return 2;}//return try_sum*solutions.size();}
+    int getLevel() const {
+        if(try_sum<100) return 1;
+        else if(try_sum<1000) return 2;
+        else return 3;
+    }
     const std::vector<Board>& getSolutions() const {return solutions;}
 };
 #endif

@@ -1,8 +1,10 @@
+#include "helper.h"
 #include "sudoku.h"
 
 #include<fstream>
 #include<string.h>
 #include<getopt.h>
+#include<regex>
 
 int main(int argc, char* args[]){
     //parse arguments
@@ -11,7 +13,7 @@ int main(int argc, char* args[]){
     bool unique = false;
     int opt;
     //TODO: check illegal arguments
-    
+    std::string error_msg;
     while((opt = getopt(argc,args,"c:s:n:m:r:u:"))!=-1){
         switch(opt){
             case 'c':
@@ -27,6 +29,11 @@ int main(int argc, char* args[]){
                 game_level = std::stoi(optarg);
                 break;
             case 'r':
+                //check if optarg is of form "min~max"
+                if(!std::regex_match(optarg,std::regex("\\d+~\\d+"))){
+                    error_msg = "bad empty cells range, should be of form min~max\n";
+                    break;
+                }
                 //range of empty cells, of form "min~max"
                 min_empty = std::stoi(optarg);
                 max_empty = std::stoi(strchr(optarg,'~')+1);
@@ -35,8 +42,18 @@ int main(int argc, char* args[]){
                 unique = std::stoi(optarg);
                 break;
             default:
-                std::cout<<"bad arguments"<<std::endl;
+                error_msg = "bad arguments\n";
+                break;
         }
+    }
+    if(error_msg!=""){
+        std::cout<<error_msg<<std::endl;
+        return 1;
+    }
+    error_msg = args_checker(final_boards_cnt, problem_input_path, games_cnt, game_level, min_empty, max_empty, unique);
+    if(error_msg!=""){
+        std::cout<<error_msg<<std::endl;
+        return 1;
     }
     //generate final boards
     if(final_boards_cnt){
@@ -49,7 +66,6 @@ int main(int argc, char* args[]){
         of.close();
     }
     //generate problems
-    games_cnt =5, min_empty=30, max_empty=50, game_level=2;
     if(games_cnt){
         std::ifstream in("final_boards.txt");
         std::cout<<&in<<std::endl;
@@ -58,7 +74,6 @@ int main(int argc, char* args[]){
         // while(!in.eof()){ not work, keep returning 0 when hit eof
         while(readBoard(board,in)){
             boards.push_back(board);
-            printBoard(board);
         }
         in.close();
         ProblemMaker pro(min_empty, max_empty, boards);
@@ -66,6 +81,7 @@ int main(int argc, char* args[]){
         while(true){
             Board problem = pro.makeProblem();
             Solver solv(problem);
+            solv.solve();
             if(unique && solv.getSolutions().size()!=1){
                 std::cout<<"not unique\n";
                 continue;
@@ -86,11 +102,10 @@ int main(int argc, char* args[]){
     }
     //solve problems
     if(problem_input_path!=""){
-        std::ifstream in(problem_input_path,std::ios::in);
+        std::ifstream in(problem_input_path);
         std::vector<Board> problems;
-        Board problem;
-        while(!in.eof()){
-            readBoard(problem,in);
+        Board problem(9,std::vector<int>(9,0));
+        while(readBoard(problem,in)){
             problems.push_back(problem);
         }
         in.close();
@@ -99,33 +114,12 @@ int main(int argc, char* args[]){
             Solver solv(problem);
             solv.solve();
             auto solutions = solv.getSolutions();
+            char msg[100];
+            sprintf(msg,"there are %d solutions\n",solutions.size());
+            of<<msg;
             for(auto solution : solutions){
                 writeBoard(solution,of);
             }
         }
     }
-
-
-
 }
-
-// int main(){
-//     Generator generator(9);
-//     auto boards = generator.generate(5);
-//     for(auto board : boards){
-//         printBoard(board);
-//     }
-//     ProblemMaker pro(30, 50, 5, boards);
-//     auto problems = pro.makeProblems();
-//     for(auto problem : problems){
-//         printBoard(problem);
-//         Solver solv(problem);
-//         solv.solve();
-//         auto solutions = solv.getSolutions();
-//         std::cout << "level: " << solv.getLevel() << std::endl;
-//         for(auto solution : solutions){
-//             printBoard(solution);
-//         }
-//     }
-//     return 0;
-// }
