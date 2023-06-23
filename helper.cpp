@@ -1,5 +1,7 @@
 #include "helper.h"
 #include<fstream>
+#include <string.h>
+#include <stdio.h>
 
 void printBoard(const Board& board){
     for(auto row : board){
@@ -82,3 +84,4 @@ std::string args_checker(int &final_boards_cnt, std::string &problem_input_path,
     }
     return error_msg;
 }
+

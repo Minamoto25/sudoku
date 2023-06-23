@@ -1,9 +1,9 @@
 #include "helper.h"
 #include "sudoku.h"
+#include "getopt.h"
 
 #include<fstream>
 #include<string.h>
-#include<getopt.h>
 #include<regex>
 
 int main(int argc, char* args[]){
@@ -12,7 +12,6 @@ int main(int argc, char* args[]){
     std::string problem_input_path;
     bool unique = false;
     int opt;
-    //TODO: check illegal arguments
     std::string error_msg;
     while((opt = getopt(argc,args,"c:s:n:m:r:u"))!=-1){
         switch(opt){

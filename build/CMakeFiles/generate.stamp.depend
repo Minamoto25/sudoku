@@ -1,0 +1,23 @@
+# CMake generation dependency list for this directory.
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeCInformation.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeCXXInformation.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeGenericSystem.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeRCInformation.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Compiler/MSVC-C.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Compiler/MSVC-CXX.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Platform/Windows-MSVC-C.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Platform/Windows-MSVC.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Platform/Windows.cmake
+C:/Users/Yuan/AppData/Local/Programs/Python/Python38/Lib/site-packages/cmake/data/share/cmake-3.22/Modules/Platform/WindowsPaths.cmake
+C:/Users/Yuan/Desktop/sudoku/CMakeLists.txt
+C:/Users/Yuan/Desktop/sudoku/build/CMakeFiles/3.22.5/CMakeCCompiler.cmake
+C:/Users/Yuan/Desktop/sudoku/build/CMakeFiles/3.22.5/CMakeCXXCompiler.cmake
+C:/Users/Yuan/Desktop/sudoku/build/CMakeFiles/3.22.5/CMakeRCCompiler.cmake
+C:/Users/Yuan/Desktop/sudoku/build/CMakeFiles/3.22.5/CMakeSystem.cmake

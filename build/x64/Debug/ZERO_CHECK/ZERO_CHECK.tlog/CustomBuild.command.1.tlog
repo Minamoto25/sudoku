@@ -1,0 +1,10 @@
+^C:\USERS\YUAN\DESKTOP\SUDOKU\BUILD\CMAKEFILES\25FE016B44C4A76AF100DEEED6E0C3B0\GENERATE.STAMP.RULE
+setlocal
+C:\Users\Yuan\AppData\Local\Programs\Python\Python38\Lib\site-packages\cmake\data\bin\cmake.exe -SC:/Users/Yuan/Desktop/sudoku -BC:/Users/Yuan/Desktop/sudoku/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Yuan/Desktop/sudoku/build/sudoku.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
