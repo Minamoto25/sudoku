@@ -10,6 +10,28 @@ void printBoard(const Board& board){
     }
     std::cout << std::endl;
 }
+void writeBoard(const Board& board, std::ostream& out){
+    for(auto row : board){
+        for(auto num : row){
+            if(num!=0) out<<num<<" ";
+            else out<<"$ ";
+        }
+        out << std::endl;
+    }
+    out << std::endl;
+}
+bool readBoard(Board& board, std::istream& in){
+    for(auto& row : board){
+        for(auto& num : row){
+            char c;
+            in>>c;
+            if(!c) return false;
+            if(c=='$') num=0;
+            else num=c-'0';
+        }
+    }
+    return true;
+}
 std::random_device rd;
 std::mt19937 gen = std::mt19937(rd());
 
@@ -108,39 +130,29 @@ std::vector<Board> Generator::generate(unsigned cnt)
     return boards;
 }
 
-std::vector<Board> ProblemMaker::makeProblems()
+Board ProblemMaker::makeProblem()
 {
     size_t size = boards[0][0].size();
-    std::vector<Board> problems;
-    while(true){
-        int board_index = std::uniform_int_distribution<int>(0, boards.size()-1)(gen);
-        Board board = boards[board_index];
-        std::vector<int> row_index(size*size);
-        for(size_t i=0; i<size*size; i++){
-            row_index[i] = i;
-        }
-        std::shuffle(row_index.begin(), row_index.end(), gen);
-        int empty_cnt = std::uniform_int_distribution<int>(min_empty, max_empty)(gen);
-        for(int i=0; i<empty_cnt; i++){
-            int row = row_index[i] / size;
-            int col = row_index[i] % size;
-            board[row][col] = 0;
-        }
-        std::string board_string;
-        for(auto row : board){
-            for(auto num : row){
-                board_string += std::to_string(num)+" ";
-            }
-        }
-        if(board_history.find(board_string) != board_history.end()){
-            continue;
-        }
-        problems.push_back(board);
-        board_history[board_string] = 1;
-        total--;
-        if(!total) break;
+    int board_index = std::uniform_int_distribution<int>(0, boards.size()-1)(gen);
+    Board board = boards[board_index];
+    std::vector<int> row_index(size*size);
+    for(size_t i=0; i<size*size; i++){
+        row_index[i] = i;
     }
-    return problems;
+    std::shuffle(row_index.begin(), row_index.end(), gen);
+    int empty_cnt = std::uniform_int_distribution<int>(min_empty, max_empty)(gen);
+    for(int i=0; i<empty_cnt; i++){
+        int row = row_index[i] / size;
+        int col = row_index[i] % size;
+        board[row][col] = 0;
+    }
+    std::string board_string;
+    for(auto row : board){
+        for(auto num : row){
+            board_string += std::to_string(num)+" ";
+        }
+    }
+    return board;
 }
 
 bool Solver::dfs(int row, int col)

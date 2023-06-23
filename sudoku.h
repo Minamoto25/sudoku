@@ -22,16 +22,17 @@ public:
 };
 
 void printBoard(const Board& board);
+void writeBoard(const Board& board, std::ostream& os);
+bool readBoard(Board& board, std::istream& is);
 
 class ProblemMaker{
     std::unordered_map<std::string,int> board_history;
     const std::vector<Board>& boards;
 public:
     int min_empty, max_empty;
-    int total;
-    ProblemMaker(int min_empty, int max_empty, int total, const std::vector<Board>& boards) :
-    min_empty(min_empty), max_empty(max_empty), total(total),boards(boards) {}
-    std::vector<Board> makeProblems();
+    ProblemMaker(int min_empty, int max_empty, const std::vector<Board>& boards) :
+    min_empty(min_empty), max_empty(max_empty), boards(boards) {}
+    Board makeProblem();
 };
 
 class Solver{
@@ -44,7 +45,8 @@ private:
 public:
     Solver(const Board& board) : board(board) {};
     void solve();
-    int getLevel() const {return try_sum*solutions.size();}
+    //TODO: return the level of the game
+    int getLevel() const {return 2;}//return try_sum*solutions.size();}
     const std::vector<Board>& getSolutions() const {return solutions;}
 };
 #endif
