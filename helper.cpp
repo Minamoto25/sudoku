@@ -36,6 +36,28 @@ bool readBoard(Board& board, std::istream& in){
     return true;
 }
 
+bool isValidSudoku(const Board& board, const int size = 9) {
+    // 检查数组是否是size * size的矩阵
+    if (board.size() != size || board[0].size() != size) {
+        return false;
+    }
+
+    // 检查0的个数是否在20到55之间
+    int zeroCount = 0;
+    for (const auto& row : board) {
+        for (const auto& num : row) {
+            if (num == 0) {
+                zeroCount++;
+            }
+        }
+    }
+    if (zeroCount < 20 || zeroCount > 55) {
+        return false;
+    }
+
+    return true;
+}
+
 std::string args_checker(int &final_boards_cnt, std::string &problem_input_path, int &games_cnt, int &game_level, int &min_empty, int &max_empty, bool &unique)
 {
     std::string error_msg;
