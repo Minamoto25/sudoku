@@ -13,12 +13,14 @@ private:
     std::unordered_map<std::string,int> board_history;
     bool isValid(const Board& board, int row, int col, int num);
     std::vector<int> genRow();
-    bool genOne(Board& board, int row, int col);
+//    bool genOne(Board& board, int row, int col);
 public:
     Generator(unsigned n) : size(n) {
         //TODO: raise exception if n is not a square number
     }
     std::vector<Board> generate(unsigned cnt);
+
+    bool genOne(Board& board, int row, int col);    // for test
 };
 
 

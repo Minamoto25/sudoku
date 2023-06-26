@@ -21,6 +21,20 @@ TEST(GeneratorTest, GenerateDifferentSudokuBoard) {
     EXPECT_FALSE(board1[0] == board2[0]);
 }
 
+TEST(GeneratorTest, TestGenOne) {
+    Board problem(9,std::vector<int>(9,0));
+    problem[0] = {6,8,1,2,3,9,7,4,5};
+    Generator generator(9);
+    EXPECT_TRUE(generator.genOne(problem, 1, 0));
+}
+
+TEST(GeneratorTest, TestCannotGenOne) {
+    Board problem(9,std::vector<int>(9,0));
+    problem[0] = {1,1,1,1,1,1,1,1,1};
+    Generator generator(9);
+    EXPECT_FALSE(generator.genOne(problem, 1, 0));
+}
+
 TEST(SolverTest, ValidSudokuBoard) {
     std::ifstream in("problems.txt");
     Board problem(9,std::vector<int>(9,0));
