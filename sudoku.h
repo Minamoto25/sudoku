@@ -38,7 +38,7 @@ private:
     unsigned long long try_sum=0;
     std::vector<Board> solutions;
     bool dfs(int row, int col);
-    bool isValid(const Board& board, int row, int col, int num);
+//    bool isValid(const Board& board, int row, int col, int num);
 public:
     Solver(const Board& board) : board(board) {};
     void solve();
@@ -49,5 +49,7 @@ public:
         else return 3;
     }
     const std::vector<Board>& getSolutions() const {return solutions;}
+
+    bool isValid(const Board& board, int row, int col, int num);    // for test
 };
 #endif
