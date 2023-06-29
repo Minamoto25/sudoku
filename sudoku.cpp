@@ -8,35 +8,6 @@
 std::random_device rd;
 std::mt19937 gen = std::mt19937(rd());
 
-bool Generator::isValid(const Board &board, int row, int col, int num) {
-  // check row
-  for (size_t i = 0; i < size; i++) {
-    if (board[row][i] == num) {
-      return false;
-    }
-  }
-  // check col
-  for (size_t i = 0; i < size; i++) {
-    if (board[i][col] == num) {
-      return false;
-    }
-  }
-  // check block
-  int block_size = static_cast<int>(sqrt(size));
-  int block_row = row / block_size;
-  int block_col = col / block_size;
-  for (size_t i = block_row * block_size; i < (block_row + 1) * block_size;
-       i++) {
-    for (size_t j = block_col * block_size; j < (block_col + 1) * block_size;
-         j++) {
-      if (board[i][j] == num) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
 std::vector<int> Generator::genRow() {
   std::vector<int> row;
   for (size_t i = 0; i < size; i++) {
@@ -140,35 +111,6 @@ bool Solver::dfs(int row, int col) {
     }
   }
   return false;
-}
-
-bool Solver::isValid(const Board &board, int row, int col, int num) {
-  // check row
-  for (size_t i = 0; i < board.size(); i++) {
-    if (board[row][i] == num) {
-      return false;
-    }
-  }
-  // check col
-  for (size_t i = 0; i < board.size(); i++) {
-    if (board[i][col] == num) {
-      return false;
-    }
-  }
-  // check block
-  int block_size = static_cast<int>(sqrt(board.size()));
-  int block_row = row / block_size;
-  int block_col = col / block_size;
-  for (size_t i = block_row * block_size; i < (block_row + 1) * block_size;
-       i++) {
-    for (size_t j = block_col * block_size; j < (block_col + 1) * block_size;
-         j++) {
-      if (board[i][j] == num) {
-        return false;
-      }
-    }
-  }
-  return true;
 }
 
 void Solver::solve() { dfs(0, 0); }

@@ -17,7 +17,6 @@ class Generator {
   unsigned size;  // generally, size should be 9, but you can try other sizes of
                   // square
   std::unordered_map<std::string, int> board_history;
-  bool isValid(const Board& board, int row, int col, int num);
   std::vector<int> genRow();
   bool genOne(int row, int col);
 
@@ -43,7 +42,6 @@ class Solver {
   uint64_t try_sum = 0;
   std::vector<Board> solutions;
   bool dfs(int row, int col);
-  bool isValid(const Board& board, int row, int col, int num);
 
  public:
   explicit Solver(const Board& board) : board(board) {}

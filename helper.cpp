@@ -6,6 +6,8 @@
 
 #include <fstream>
 
+#include "helper.h"
+
 void printBoard(const Board& board) {
   for (auto row : board) {
     for (auto num : row) {
@@ -18,7 +20,6 @@ void printBoard(const Board& board) {
   }
   std::cout << std::endl;
 }
-
 
 std::string args_checker(const Args& args) {
   std::string error_msg;
@@ -53,6 +54,34 @@ std::string args_checker(const Args& args) {
     error_msg = "Error: game level must be between 1~3";
   }
   return error_msg;
+}
+bool isValid(const Board& board, int row, int col, int num) {
+  // check row
+  for (size_t i = 0; i < board.size(); i++) {
+    if (board[row][i] == num) {
+      return false;
+    }
+  }
+  // check col
+  for (size_t i = 0; i < board.size(); i++) {
+    if (board[i][col] == num) {
+      return false;
+    }
+  }
+  // check block
+  size_t block_size = static_cast<size_t>(sqrt(board.size()));
+  size_t block_row = row / block_size;
+  int block_col = col / block_size;
+  for (size_t i = block_row * block_size; i < (block_row + 1) * block_size;
+       i++) {
+    for (size_t j = block_col * block_size; j < (block_col + 1) * block_size;
+         j++) {
+      if (board[i][j] == num) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 void BoardDumper::operator()(const Board& board) {
   for (auto row : board) {
