@@ -13,16 +13,18 @@ typedef std::vector<std::vector<int>> Board;
 
 class Generator {
  private:
-  Board one_board;
+  //Board one_board;
   unsigned size;  // generally, size should be 9, but you can try other sizes of
                   // square
   std::unordered_map<std::string, int> board_history;
   std::vector<int> genRow();
-  bool genOne(int row, int col);
+  // bool genOne(int row, int col);
 
  public:
+  Board one_board;
   explicit Generator(unsigned n) : size(n) {}
   std::vector<Board> generate(unsigned cnt);
+  bool genOne(int row, int col);
 };
 
 class ProblemMaker {

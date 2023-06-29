@@ -33,4 +33,5 @@ struct BoardReader {
 
 bool checkRange(std::string str);
 void printBoard(const Board& board);
+bool isValidSudoku(const Board& board, int size);
 #endif  // INCLUDE_HELPER_H_

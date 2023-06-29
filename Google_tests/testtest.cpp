@@ -3,8 +3,8 @@
 //
 #include <fstream>
 #include "gtest/gtest.h"
-#include "../sudoku.h"
-#include "../helper.h"
+#include "../include/sudoku.h"
+#include "../include/helper.h"
 
 TEST(GeneratorTest, GenerateValidSudokuBoard) {
     Generator generator(9);
@@ -22,25 +22,27 @@ TEST(GeneratorTest, GenerateDifferentSudokuBoard) {
 }
 
 TEST(GeneratorTest, TestGenOne) {
-    Board problem(9,std::vector<int>(9,0));
-    problem[0] = {6,8,1,2,3,9,7,4,5};
     Generator generator(9);
-    EXPECT_TRUE(generator.genOne(problem, 1, 0));
+    Board problem(9,std::vector<int>(9,0));
+    generator.one_board = problem;
+    generator.one_board[0] = {6,8,1,2,3,9,7,4,5};
+    EXPECT_TRUE(generator.genOne(1, 0));
 }
 
 TEST(GeneratorTest, TestCannotGenOne) {
-    Board problem(9,std::vector<int>(9,0));
-    problem[0] = {1,1,1,1,1,1,1,1,1};
     Generator generator(9);
-    EXPECT_FALSE(generator.genOne(problem, 1, 0));
+    Board problem(9,std::vector<int>(9,0));
+    generator.one_board = problem;
+    generator.one_board[0] = {1,1,1,1,1,1,1,1,1};
+    EXPECT_FALSE(generator.genOne(1, 0));
 }
 
 TEST(SolverTest, ValidSudokuBoard) {
     std::ifstream in("problems.txt");
-    Board problem(9,std::vector<int>(9,0));
-    readBoard(problem,in);
+    BoardReader reader(in);
+    reader();
     in.close();
-    EXPECT_TRUE(isValidSudoku(problem, 9));
+    EXPECT_TRUE(isValidSudoku(reader.board, 9));
 }
 
 TEST(SolverTest, InvalidSudokuBoard) {
@@ -50,13 +52,11 @@ TEST(SolverTest, InvalidSudokuBoard) {
 
 TEST(SolverTest, SolveValidSudokuBoard) {
     std::ifstream in("problems.txt");
-    Board problem(9,std::vector<int>(9,0));
-    readBoard(problem,in);
+    BoardReader reader(in);
+    reader();
     in.close();
 
-    //printBoard(problem);
-
-    Solver solver(problem);
+    Solver solver(reader.board);
     solver.solve();
     auto solutions = solver.getSolutions();
     EXPECT_TRUE(solutions.size() >= 1);
@@ -73,7 +73,7 @@ TEST(SolverTest, ValidStepValidation) {
                      {3,0,9,4,5,0,2,7,1},
                      {0,6,0,9,0,0,8,3,0}};
     Solver solver(problem);
-    EXPECT_TRUE(solver.isValid(problem, 0, 1, 2));
+    EXPECT_TRUE(isValid(problem, 0, 1, 2));
 }
 
 TEST(SolverTest, InvalidStepValidation) {
@@ -87,15 +87,15 @@ TEST(SolverTest, InvalidStepValidation) {
                      {3,0,9,4,5,0,2,7,1},
                      {0,6,0,9,0,0,8,3,0}};
     Solver solver(problem);
-    EXPECT_FALSE(solver.isValid(problem, 0, 1, 1));
+    EXPECT_FALSE(isValid(problem, 0, 1, 1));
 }
 
 TEST(ProblemMakerTest, MakeValidSudokuProblem) {
     std::ifstream in("final_boards.txt");
     std::vector<Board> solution;
-    Board board(9,std::vector<int>(9,0));
-    readBoard(board,in);
-    solution.push_back(board);
+    BoardReader reader(in);
+    reader();
+    solution.push_back(reader.board);
     in.close();
 
     ProblemMaker problem_maker(20, 55, solution);
@@ -106,9 +106,9 @@ TEST(ProblemMakerTest, MakeValidSudokuProblem) {
 TEST(ProblemMakerTest, MakeDifferentSudokuProblem) {
     std::ifstream in("final_boards.txt");
     std::vector<Board> solution;
-    Board board(9,std::vector<int>(9,0));
-    readBoard(board,in);
-    solution.push_back(board);
+    BoardReader reader(in);
+    reader();
+    solution.push_back(reader.board);
     in.close();
 
     bool have_diff = false;
