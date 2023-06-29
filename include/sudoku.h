@@ -1,4 +1,4 @@
-/*Copyright 2023 Ma Jiangyuan & FengChaopeng*/
+/*Copyright 2023 Ma Jiangyuan & FengZhaopeng*/
 #ifndef INCLUDE_SUDOKU_H_
 #define INCLUDE_SUDOKU_H_
 #include <cstdint>

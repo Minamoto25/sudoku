@@ -1,4 +1,4 @@
-/*Copyright 2023 Ma Jiangyuan & FengChaopeng*/
+/*Copyright 2023 Ma Jiangyuan & FengZhaopeng*/
 #ifndef INCLUDE_HELPER_H_
 #define INCLUDE_HELPER_H_
 #include <string>

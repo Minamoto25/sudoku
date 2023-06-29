@@ -1,4 +1,4 @@
-/*Copyright 2023 Ma Jiangyuan & FengChaopeng*/
+/*Copyright 2023 Ma Jiangyuan & FengZhaopeng*/
 #include "include/helper.h"
 
 #include <stdio.h>
