@@ -6,7 +6,6 @@
 
 #include <fstream>
 
-#include "helper.h"
 
 void printBoard(const Board& board) {
   for (auto row : board) {
@@ -71,7 +70,7 @@ bool isValid(const Board& board, int row, int col, int num) {
   // check block
   size_t block_size = static_cast<size_t>(sqrt(board.size()));
   size_t block_row = row / block_size;
-  int block_col = col / block_size;
+  size_t block_col = col / block_size;
   for (size_t i = block_row * block_size; i < (block_row + 1) * block_size;
        i++) {
     for (size_t j = block_col * block_size; j < (block_col + 1) * block_size;
