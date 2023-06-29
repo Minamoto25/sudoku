@@ -19,6 +19,7 @@ void printBoard(const Board& board) {
   std::cout << std::endl;
 }
 
+
 std::string args_checker(const Args& args) {
   std::string error_msg;
   // if no arg specified, print usage
@@ -28,8 +29,9 @@ std::string args_checker(const Args& args) {
     error_msg =
         "Usage: ./sudoku -c final_boards_cnt -s problem_input_path -n "
         "games_cnt -m game_level -r min_empty~max_empty -u unique";
-  } else if (!args.games_cnt && (args.game_level | args.min_empty |
-                                 args.max_empty | args.unique)) {
+  } else if (!args.games_cnt &&
+             ((args.game_level != 0) | (args.min_empty != 0) |
+              (args.max_empty != 0) | args.unique)) {
     error_msg = "Error: -n must be specified when -m, -r or -u is specified";
   } else if (args.min_empty && args.min_empty < 20 ||
              args.max_empty && args.max_empty > 55) {  // arg range check

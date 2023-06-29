@@ -13,6 +13,7 @@ typedef struct {
 } Args;
 
 std::string args_checker(const Args& args);
+
 struct BoardDumper {
   std::ofstream& os;
   explicit BoardDumper(std::ofstream& os) : os(os) {}

@@ -22,7 +22,7 @@ bool Generator::isValid(const Board &board, int row, int col, int num) {
     }
   }
   // check block
-  int block_size = sqrt(size);
+  int block_size = static_cast<int>(sqrt(size));
   int block_row = row / block_size;
   int block_col = col / block_size;
   for (size_t i = block_row * block_size; i < (block_row + 1) * block_size;
@@ -40,7 +40,7 @@ bool Generator::isValid(const Board &board, int row, int col, int num) {
 std::vector<int> Generator::genRow() {
   std::vector<int> row;
   for (size_t i = 0; i < size; i++) {
-    row.push_back(i + 1);
+    row.push_back(static_cast<int>(i) + 1);
   }
   std::string row_string;
   std::shuffle(row.begin(), row.end(), gen);
@@ -56,7 +56,7 @@ bool Generator::genOne(int row, int col) {
   }
   std::vector<int> nums;
   for (size_t i = 1; i <= size; i++) {
-    nums.push_back(i);
+    nums.push_back(static_cast<int>(i));
   }
   std::shuffle(nums.begin(), nums.end(), gen);
   for (auto num : nums) {
@@ -97,18 +97,18 @@ std::vector<Board> Generator::generate(unsigned cnt) {
 
 Board ProblemMaker::makeProblem() {
   size_t size = boards[0][0].size();
-  int board_index =
-      std::uniform_int_distribution<int>(0, boards.size() - 1)(gen);
+  int board_index = std::uniform_int_distribution<int>(
+      0, static_cast<int>(boards.size()) - 1)(gen);
   Board board = boards[board_index];
   std::vector<int> row_index(size * size);
   for (size_t i = 0; i < size * size; i++) {
-    row_index[i] = i;
+    row_index[i] = static_cast<int>(i);
   }
   std::shuffle(row_index.begin(), row_index.end(), gen);
   int empty_cnt = std::uniform_int_distribution<int>(min_empty, max_empty)(gen);
   for (int i = 0; i < empty_cnt; i++) {
-    int row = row_index[i] / size;
-    int col = row_index[i] % size;
+    int row = row_index[i] / static_cast<int>(size);
+    int col = row_index[i] % static_cast<int>(size);
     board[row][col] = 0;
   }
   std::string board_string;
@@ -132,8 +132,8 @@ bool Solver::dfs(int row, int col) {
     return dfs(row, col + 1);
   }
   for (size_t i = 1; i <= board.size(); i++) {
-    if (isValid(board, row, col, i)) {
-      board[row][col] = i;
+    if (isValid(board, row, col, static_cast<int>(i))) {
+      board[row][col] = static_cast<int>(i);
       bool res = dfs(row, col + 1);
       if (!res) try_sum += 1;
       board[row][col] = 0;
@@ -156,7 +156,7 @@ bool Solver::isValid(const Board &board, int row, int col, int num) {
     }
   }
   // check block
-  int block_size = sqrt(board.size());
+  int block_size = static_cast<int>(sqrt(board.size()));
   int block_row = row / block_size;
   int block_col = col / block_size;
   for (size_t i = block_row * block_size; i < (block_row + 1) * block_size;
