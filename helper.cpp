@@ -82,6 +82,17 @@ bool isValid(const Board& board, int row, int col, int num) {
   }
   return true;
 }
+
+std::string board_to_string(const Board& board) {
+  std::string board_string;
+  for (auto row : board) {
+    for (auto num : row) {
+      board_string += std::to_string(num) + "";
+    }
+  }
+  return board_string;
+}
+
 void BoardDumper::operator()(const Board& board) {
   for (auto row : board) {
     for (auto num : row) {

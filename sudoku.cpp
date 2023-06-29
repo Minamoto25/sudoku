@@ -50,12 +50,7 @@ std::vector<Board> Generator::generate(unsigned cnt) {
     one_board[0] = row;
     while (!genOne(1, 0)) {
     }
-    std::string board_string;
-    for (auto row : one_board) {
-      for (auto num : row) {
-        board_string += std::to_string(num) + "";
-      }
-    }
+    std::string board_string = board_to_string(one_board);
     if (board_history.find(board_string) != board_history.end()) {
       continue;
     }
@@ -93,6 +88,12 @@ Board ProblemMaker::makeProblem() {
 
 bool Solver::dfs(int row, int col) {
   if (row == board.size()) {
+    std::string board_string = board_to_string(board);
+    if (board_history.find(board_string) !=
+        board_history.end()) {
+      return false;
+    }
+    board_history[board_string] = 1;
     solutions.push_back(board);
     return true;
   }

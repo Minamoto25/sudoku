@@ -42,7 +42,7 @@ class Solver {
   uint64_t try_sum = 0;
   std::vector<Board> solutions;
   bool dfs(int row, int col);
-
+  std::unordered_map<std::string, int> board_history;
  public:
   explicit Solver(const Board& board) : board(board) {}
   void solve();

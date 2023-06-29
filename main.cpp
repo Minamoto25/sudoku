@@ -7,11 +7,10 @@
 #include "include/helper.h"
 #include "include/sudoku.h"
 
-
 int main(int argc, char* argv[]) {
   // parse arguments
-  Args args;
-  memset(&args, 0, sizeof(args));
+  Args args{};
+  // memset(&args, 0, sizeof(args));
   int opt;
   std::string error_msg;
   while ((opt = getopt(argc, argv, "c:s:n:m:r:u")) != -1) {
@@ -83,14 +82,13 @@ int main(int argc, char* argv[]) {
       Solver solv(problem);
       solv.solve();
       if (args.unique && solv.getSolutions().size() != 1) {
-        std::cout << "not unique\n";
         continue;
       }
       if (args.game_level && solv.getLevel() != args.game_level) {
-        std::cout << "not match level\n";
         continue;
       }
       final_problems.push_back(problem);
+      std::cout << "generated " << final_problems.size() << " problems\n";
       if (final_problems.size() == args.games_cnt) {
         break;
       }
@@ -110,7 +108,7 @@ int main(int argc, char* argv[]) {
       problems.push_back(readBoard.board);
     }
     in.close();
-    std::ofstream of("solutions.txt", std::ios::out);
+    std::ofstream of("sudoku.txt", std::ios::out);
     BoardDumper writeBoard(of);
     for (auto problem : problems) {
       Solver solv(problem);

@@ -14,6 +14,7 @@ typedef struct {
 
 std::string args_checker(const Args& args);
 bool isValid(const Board& board, int row, int col, int num);
+std::string board_to_string(const Board& board);
 
 struct BoardDumper {
   std::ofstream& os;
